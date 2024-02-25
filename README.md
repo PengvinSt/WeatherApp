@@ -1,5 +1,15 @@
 This project was build for test task
 
+To start the project go to comandline and execute the following commands:
+
+git clone https://github.com/PengvinSt/WeatherApp.git
+
+cd ../WeatherApp
+
+git i
+
+npm start
+
 ### Sripts
 
 ### `npm start` 
