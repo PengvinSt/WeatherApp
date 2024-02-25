@@ -1,0 +1,78 @@
+// colors
+$main-page-background-color:#D69E36;
+$text-color:lighten(#000000, 40%);
+$button-background-color:#DEAB4D;
+$button-background-color-hover:#c59742;
+$button-border-color:#c59742;
+
+//params 
+$button-shadow:0 15px 10px #D69E36;
+
+.main_page_container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    background: $main-page-background-color;
+
+    .cards_container {
+        display: flex;
+        flex-wrap: wrap;
+        gap:10px;
+        // border: 1px solid red;
+        @media (max-width: 510px) {
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: nowrap;
+        }
+    }
+    @media(min-width: 40rem) {
+        padding: 2rem;
+    }
+    
+}
+.center_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    .add_user_button {
+        border-radius: 50%;
+        height: 250px;
+        width: 250px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        outline: none;
+        border:transparent;
+        box-shadow: $button-shadow;
+        -moz-transition: 0.1s;
+        -webkit-transition: 0.1s;
+        transition: 0.1s;
+        position: relative;
+        border-bottom: 0.25em solid $button-border-color;
+        background-color: $button-background-color;
+        gap: 5px;
+        img {
+            width: 150px;
+            height: 150px;
+        }
+        span {
+            font-size: 2em;
+            color:$text-color;
+        }
+        cursor: pointer;
+        &:hover {
+            background: $button-background-color-hover;
+            border-bottom-width: 0;
+            top:5px;
+        }
+    }
+}

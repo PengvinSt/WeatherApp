@@ -1,0 +1,144 @@
+// color
+$main-page-background-color:#D69E36;
+$main-page-background-color-add1:#DEAB4D;
+$main-page-background-color-add2:#d19e409f;
+$text-color:lighten(#000000, 40%);
+$button-background-color:#DEAB4D;
+$button-background-color-add2:#c58000;
+$button-background-color-hover:#c59742;
+$button-border-color:#c59742;
+
+//params
+$container-shadow:0 10px 15px 0 rgba(40, 50, 61, 0.4);
+$button-shadow:0 2px 3px #D69E36;
+
+.back_button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    outline: none;
+    border:none;
+    background-color: $button-background-color-add2;
+    cursor: pointer;
+    color:$text-color;
+    &:hover{
+        transform: scale(1.04);
+    }
+}
+
+.weather_page_container{
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    background: $main-page-background-color;
+    border-radius: 15px;
+
+    .weather_graph_container,.weather_info_container {
+        border-radius: 15px;
+        padding: 5px;
+        width: 98%;
+        min-height: 45%;
+        background: $main-page-background-color-add1;
+        color: $text-color;
+        box-shadow: $container-shadow;
+    }
+    
+    .weather_graph_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap:5px;
+        padding: 0 15px;
+        min-height: 50%;
+        .weather_graph_inner_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap:5px;
+            width: 100%;
+            .weather_image {
+                border-radius: 15px;
+                height: 350px;
+                width: 350px;
+                @media (max-width: 1100px) {
+                    display: none;
+                }
+            }
+            .graph {
+                width: 100%;
+                height: 350px;
+            }
+            
+        }
+
+        .day_picker_container {
+            width: 98%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+    
+            .select_day_button {
+            height: 50px;
+            width: 120px;
+            border-radius: 15px;
+            background-color: $button-background-color;
+            outline: none;
+            border:transparent;
+            border-bottom: 0.25em solid $button-border-color;
+            color:$text-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: $button-shadow;
+            -moz-transition: 0.1s;
+            -webkit-transition: 0.1s;
+            transition: 0.1s;
+            position: relative;
+            &:hover {
+                background: $button-background-color-hover;
+                border-bottom-width: 0;
+                top:5px;
+            }
+            }
+        }
+        @media (max-width: 510px) {
+            display: none;
+        }
+    }
+    @media (max-width: 510px) {
+       height: auto;
+    }
+    
+    
+
+    .weather_info_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:10px;
+        h1 {
+            font-size: 2em;
+        }
+        .info_container {
+            width: 99%;
+            height: 100%;
+            background-color: $main-page-background-color-add2;
+            border-radius: 15px;
+            padding: 10px;
+            p {
+                font-size: 1.3em;
+            }
+        }
+    }
+    
+}
+

@@ -1,0 +1,51 @@
+// colors
+$text-color:lighten(#000000, 40%);
+$button-background-color:#DEAB4D;
+$button-background-color-hover:#c59742;
+$button-border-color:#c59742;
+$card-background-color:#DEAB4D;
+
+// params
+$card-shadow:0 30px 60px 0 rgba(40, 50, 61, 0.4);
+$button-shadow:0 2px 3px #D69E36;
+
+.user_card {
+    width: 250px;
+    min-height: 600px;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 5px;
+    background: $card-background-color;
+    color:$text-color;
+    box-shadow: $card-shadow;
+    border-radius: 15px;
+    .profile_image {
+        border-radius: 15px;
+    }
+    .user_card_button {
+        margin: 5px 0 0 0;
+        height: 50px;
+        border-radius: 15px;
+        background-color: $button-background-color;
+        outline: none;
+        border:transparent;
+        border-bottom: 0.25em solid $button-border-color;
+        color:$text-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: $button-shadow;
+        -moz-transition: 0.1s;
+        -webkit-transition: 0.1s;
+        transition: 0.1s;
+        position: relative;
+        &:hover {
+            background: $button-background-color-hover;
+            border-bottom-width: 0;
+            top:5px;
+        }
+    }
+}
