@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 function MainPage() {
   const { api, store } = useAppContext()
-  const [userList, setUserList] = useState<IUser[]>([])
+  const [userListLoaded, setUserListLoaded] = useState<IUser[]>([])
   const [loadingCard, setLoadingCard] = useState(false);
   const [openModal, setOpenModal] = useState(false)
 
@@ -24,17 +24,19 @@ function MainPage() {
   const getOneUser = async () => {
     setLoadingCard(true)
     await api.user.getOneUser()
-    setUserList(()=> [...store.user.userList]);
+    setUserListLoaded(()=> [...store.user.userList]);
     setLoadingCard(false)
   }
 
 
 const reloadUserList = () => {
+  setUserListLoaded(()=> []);
   if(store.user.userList.length > 0){
-    setUserList(()=> [...store.user.userList]);
+    setUserListLoaded(()=> [...store.user.userList]);
   }
-  setUserList(()=> []);
 }
+
+
   useEffect(()=>{
     reloadUserList()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,7 +46,7 @@ const reloadUserList = () => {
     <Modal isOpenModal={openModal} setOpenModal={()=> setOpenModal(false)}/>
     <div className='main_page_container'>
       <section className='cards_container'>
-      {userList.length > 0 && userList.map((user,i)=> <UserCard user={user} key={i} reloadUserList={reloadUserList} setOpenModal={()=> setOpenModal(true)}/>)}
+      {userListLoaded.length > 0 && userListLoaded.map((user,i)=> <UserCard user={user} key={i} reloadUserList={reloadUserList} setOpenModal={()=> setOpenModal(true)}/>)}
         <div className='user_card'>
           <div className='center_container'>
             {loadingCard ? (<>Loading...</>): (

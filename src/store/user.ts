@@ -62,6 +62,9 @@ export default class UserStore {
     removeUserListOnce(user: IUser){
         this.userList.splice(this.userList.indexOf(user), 1)
     }
+    removeUserSavedListOnce(user: IUser){
+        this.userSavedList.splice(this.userSavedList.indexOf(user), 1)
+    }
 
     saveUserLocaly(user:IUser){
         const storage =localStorage.getItem('savedUsers')

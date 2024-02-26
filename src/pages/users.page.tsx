@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 function SavedPage() {
 
   const { store } = useAppContext()
-  const [userList, setUserList] = useState<IUser[]>([])
+  const [userSavedListLoaded, setUserSavedListLoaded] = useState<IUser[]>([])
   const [loadingAll, setLoadingAll] = useState(true);
   const [openModal, setOpenModal] = useState(false)
 
@@ -26,14 +26,18 @@ function SavedPage() {
         setLoadingAll(true)
         const isHaveLocal = store.user.getSavedUserLocaly()
         if(isHaveLocal){
-            setUserList(()=> [...store.user.userSavedList]);
+          setUserSavedListLoaded([...store.user.userSavedList]);
         }
    
         setLoadingAll(false)
     }
     
-    const reloadUserList = () => {
-      setUserList(()=> [...store.user.userSavedList]);
+    
+    const reloadSavedUserList = () => {
+      setUserSavedListLoaded(()=> []);
+      if(store.user.userSavedList.length > 0){
+        setUserSavedListLoaded(()=> [...store.user.userSavedList]);
+      }
     }
 
     useEffect(()=>{
@@ -44,13 +48,21 @@ function SavedPage() {
     <div className='user_page_container'>
       <Modal isOpenModal={openModal} setOpenModal={()=> setOpenModal(false)}/>
       <section className='cards_container'>
-      {loadingAll ? (<>Loading...</>): (<>
+      {loadingAll ? (<div className='user_card'>
+            <div className='center_container'>
+              <p>Loading ...</p>
+            </div>
+          </div> ): (<>
         {
-            userList.length > 0 
-            ? userList.map((user,i)=> 
-                <UserCard user={user} key={i} reloadUserList={reloadUserList} setOpenModal={()=> setOpenModal(true)}/>
+            userSavedListLoaded.length > 0 
+            ? userSavedListLoaded.map((user,i)=> 
+                  <UserCard user={user} key={i} reloadSavedUserList={reloadSavedUserList} setOpenModal={()=> setOpenModal(true)}/>
                 )
-            : <p>Nothing here . . .</p>
+            : <div className='user_card'>
+            <div className='center_container'>
+              <p>Nothing here ...</p>
+            </div>
+          </div> 
         }
       </>)}
       <div className='user_card'>

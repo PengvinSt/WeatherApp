@@ -6,16 +6,18 @@ import { observer } from 'mobx-react'
 
 interface UserCardProps {
     user: IUser,
-    reloadUserList: ()=>void,
+    reloadUserList?: ()=>void,
+    reloadSavedUserList?: ()=>void,
     setOpenModal:() => void
   }
 
-function UserCard({user, reloadUserList, setOpenModal}:UserCardProps) {
+function UserCard({user, reloadSavedUserList, reloadUserList, setOpenModal}:UserCardProps) {
 
   const [ buttonType, setButtonType ] = useState(false)
 
   const { api, store } = useAppContext()
   const getCurrentLocalWeather = async (user:IUser) => {
+    store.user.saveCurrentUser(user)
     await api.weather.getCurrentWeather(user)
     setOpenModal()
   }
@@ -30,16 +32,16 @@ function UserCard({user, reloadUserList, setOpenModal}:UserCardProps) {
   }
   const deleteUser = (user:IUser) => {
     store.user.removeUserListOnce(user)
-    reloadUserList()
+    if(reloadUserList !== undefined) reloadUserList()
+    if(reloadSavedUserList !== undefined) reloadSavedUserList()
   }
   const isUserSaved = (user:IUser) => {
     return store.user.isUserSaved(user)
   }
   useEffect(()=> {
-    store.user.saveCurrentUser(user)
     isUserSaved(user) ? setButtonType(true) : setButtonType(false) 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [user])
   return (
     <div className='user_card'>
         <img className='profile_image' src={user.picture.medium} alt="user profile" />
